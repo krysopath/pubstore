@@ -4,6 +4,6 @@ from os import environ
 
 __home__ = '{}//'.format(environ['HOME'])
 #__pwd__ = '{}//'.format(environ['PWD'])
-__dbfile__ = 'pubstore.db'
+__dbfile__ = 'pubstore-storage.db'
 __dbconn__ = 'sqlite:///{}'.format(__dbfile__)
 __countrycode__ = "DE"
