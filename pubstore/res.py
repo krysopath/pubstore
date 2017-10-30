@@ -6,22 +6,23 @@ from .parser import key_parser
 
 
 class Keys(Resource):
-    def __init__(self, *args, **kwargs):
-        Resource.__init__(self, *args, **kwargs)
+    def __init__(self):
+        Resource.__init__(self)
         self.KeyModel = Key
         self.parser = key_parser
 
     def get(self):
-        return {
-            'keys': {
-                k.id: {
-                    "type": k.key_type,
-                    "value": k.key_value,
-                    "comment": k.key_comment,
-                    "creation_time": str(k.creation_time)
-                } for k in self.KeyModel.query.all()
-            }
-        }
+        # return {
+        #     'keys': {
+        #         k.id: {
+        #             "type": k.key_type,
+        #             "value": k.key_value,
+        #             "comment": k.key_comment,
+        #             "creation_time": str(k.creation_time)
+        #         } for k in self.KeyModel.query.all()
+        #     }
+        # }
+        return '\n'.join(self.KeyModel.query.all())
 
     def post(self):
         args = self.parser.parse_args()
