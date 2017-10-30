@@ -18,5 +18,6 @@ setup(
         'flask', 'flask_restful',
         'sqlalchemy', 'PyYAML'
     ],
-    zip_safe=False
+    zip_safe=False,
+    scripts=["bin/pubstore", "bin/pubstore-server"]
 )
