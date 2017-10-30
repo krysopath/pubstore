@@ -1,0 +1,15 @@
+[Unit]
+Description=pubstore-storage system service
+After=syslog.target
+
+[Service]
+Type=simple
+User=pubstore
+Group=pubstore
+WorkingDirectory=/home/pubstore/pubkey-storage/
+ExecStart=/home/pubstore/pubkey-storage/bin/pubstore-server
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
