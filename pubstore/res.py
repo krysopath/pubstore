@@ -8,7 +8,7 @@ from .parser import key_parser
 class Keys(Resource):
     def __init__(self, *args, **kwargs):
         Resource.__init__(self, *args, **kwargs)
-        self.Model = Key
+        self.KeyModel = Key
         self.parser = key_parser
 
     def get(self):
@@ -19,28 +19,35 @@ class Keys(Resource):
                     "value": k.key_value,
                     "comment": k.key_comment,
                     "creation_time": str(k.creation_time)
-                } for k in self.Model.query.all()
+                } for k in self.KeyModel.query.all()
             }
         }
 
     def post(self):
         args = self.parser.parse_args()
-        k = self.Model(
-            value=args['pubkey']
-        )
+        keys = args['pubkey']
+        results = []
+        print(keys)
+        if isinstance(keys, (list,)):
 
+            for key in keys:
+                results.append(self.try_commit_key(key))
+        else:
+            results = self.try_commit_key(keys)
+        return results
+
+    def try_commit_key(self, key):
+        k = self.KeyModel(
+            value=key)
         try:
             db.add(k)
             db.commit()
             return {
-                'key': {
                     "type": k.key_type,
                     "value": k.key_value,
                     "comment": k.key_comment,
-                    "creation_time": str(k.creation_time)
-                },
-            }
+                "creation_time": str(k.creation_time)}
 
         except IntegrityError as ie:
             db.rollback()
-            return {'key': False, 'reason': ie.args}
+            return {'key': k.recombined(), 'error': ie.args}

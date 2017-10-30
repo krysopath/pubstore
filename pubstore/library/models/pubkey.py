@@ -47,3 +47,6 @@ class Key(Base, Skeleton):
     def __repr__(self):
         return "<Key(value=%r)>" \
                % self.value
+
+    def recombined(self):
+        return "%s %s %s" % (self.key_type, self.key_value, self.key_comment)
