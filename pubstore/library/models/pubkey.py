@@ -42,7 +42,7 @@ class Key(Base, Skeleton):
     ]
 
     def __init__(self, value=None, *args, **kwargs):
-        self.key_type, self.key_value, self.key_comment = value.split(' ')
+        self.key_type, self.key_value, self.key_comment = value.split(' ', 2)
 
     def __repr__(self):
         return "<Key(value=%r)>" \
