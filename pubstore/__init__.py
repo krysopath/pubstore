@@ -6,7 +6,7 @@ from flask_restful import Api
 
 app = Flask(__name__)
 api = Api(app)
-api.add_resource(Keys, '/keys')
+api.add_resource(Keys, '/keys/<mimetype>')
 
 
 @app.before_request

@@ -13,10 +13,16 @@ setup(
     author='Georg vom Endt',
     author_email='krysopath@gmail.com',
     license='GPL',
-    packages=['pubstore', 'pubstore.library', 'pubstore.library.models', 'pubstore_client'],
+    packages=[
+        'pubstore',
+        'pubstore.library',
+        'pubstore.library.models',
+        'pubstore_client'],
     install_requires=[
-        'flask', 'flask_restful',
-        'sqlalchemy', 'PyYAML'
+        'flask',
+        'flask_restful',
+        'sqlalchemy',
+        'PyYAML'
     ],
     zip_safe=True,
     scripts=["bin/pubstore", "bin/pubstore-server"]
